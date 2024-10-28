@@ -52,6 +52,8 @@
 
             <button type="button" class="btn btn-primary" onclick="wstaw(event)">Wstaw dane</button>
 
+            <button type="button" onclick="" id="przycisk2" onclick="zmien(event)" class="btn btn-primary">Zlokalizuj użytkownika</button>
+
         </form>
 
         <ul id="poleDane">
@@ -137,15 +139,44 @@
             document.getElementById("branza").value="Cement";
             document.getElementById("aktywny").checked=true;
 
-            document.getElementById("nazwaFirmy").disabled=true;
-            document.getElementById("nip").disabled=true;
-            document.getElementById("miasto").disabled=true;
-            document.getElementById("ulica").disabled=true;
-            document.getElementById("nrDomu").disabled=true;
-            document.getElementById("kodPocztowy").disabled=true;
-            document.getElementById("uwagi").disabled=true;
-            document.getElementById("branza").disabled=true;
-            document.getElementById("aktywny").disabled=true;
+            zablokujDostep(event);
+        }
+
+        function zmien(event)
+        {
+
+            const obiekt = {
+            nazwaFirmy: document.getElementById("nazwaFirmy").value,
+            nip: document.getElementById("nip").value,
+            miasto: document.getElementById("miasto").value,
+            ulica: document.getElementById("ulica").value,
+            nrDomu: document.getElementById("nrDomu").value,
+            nrMieszkania: document.getElementById("nrMieszkania").value,
+            kodPocztowy: document.getElementById("kodPocztowy").value,
+            uwagi: document.getElementById("uwagi").value,
+            branza: document.getElementById("branza").value,
+            aktywny: document.getElementById("aktywny").checked
+            };
+
+            let szukaj = listaKupujacych.find(obiekt);
+
+            wyzeruj(event);
+
+            const obiekt2 = {
+            nazwaFirmy: document.getElementById("nazwaFirmy").value,
+            nip: document.getElementById("nip").value,
+            miasto: document.getElementById("miasto").value,
+            ulica: document.getElementById("ulica").value,
+            nrDomu: document.getElementById("nrDomu").value,
+            nrMieszkania: document.getElementById("nrMieszkania").value,
+            kodPocztowy: document.getElementById("kodPocztowy").value,
+            uwagi: document.getElementById("uwagi").value,
+            branza: document.getElementById("branza").value,
+            aktywny: document.getElementById("aktywny").checked
+            };
+
+            szukaj = obiekt2;
+
         }
 
         function przywrocDostep(event)
@@ -161,6 +192,34 @@
             document.getElementById("uwagi").disabled=false;
             document.getElementById("branza").disabled=false;
             document.getElementById("aktywny").disabled=false;
+        }
+
+        function zablokujDostep(event)
+        {
+            event.preventDefault()
+
+            document.getElementById("nazwaFirmy").disabled=true;
+            document.getElementById("nip").disabled=true;
+            document.getElementById("miasto").disabled=true;
+            document.getElementById("ulica").disabled=true;
+            document.getElementById("nrDomu").disabled=true;
+            document.getElementById("kodPocztowy").disabled=true;
+            document.getElementById("uwagi").disabled=true;
+            document.getElementById("branza").disabled=true;
+            document.getElementById("aktywny").disabled=true;
+        }
+
+        function wyzeruj(event)
+        {
+            document.getElementById("nazwaFirmy").value=undefined;
+            document.getElementById("nip").value=undefined;
+            document.getElementById("miasto").value=undefined;
+            document.getElementById("ulica").value=undefined;
+            document.getElementById("nrDomu").value=undefined;
+            document.getElementById("kodPocztowy").value=undefined;
+            document.getElementById("uwagi").value=undefined;
+            document.getElementById("branza").value=undefined;
+            document.getElementById("aktywny").checked=false;
         }
 
     </script>
