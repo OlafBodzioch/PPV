@@ -5,11 +5,12 @@
     <link href="assets/style/style.css" rel="stylesheet">
 </head>
 <body style="padding: 3vw;">
-    <form onsubmit="zapisz(event)">
+    
+    <div class="mb-3" id="pole">
+        
+        <h1 id="tekstGora">Lista klientów:</h1>
 
-        <h1>Proszę dodać klienta</h1>
-
-        <div class="mb-3">
+        <form onsubmit="zapisz(event)" id="poleFormularz" style="display: none;">
 
             <label class="form-label first-element" for="nazwaFirmy">Nazwa firmy</label>
             <input class="form-control"  type="text" placeholder="Firma123" id="nazwaFirmy" required><br>
@@ -49,12 +50,39 @@
         
             <input type="submit" class="btn btn-primary" value="Zapisz">
 
-            <button type="button" id="przycisk" class="btn btn-primary" onclick="wstaw(event)">Wstaw dane</button>
+            <button type="button" class="btn btn-primary" onclick="wstaw(event)">Wstaw dane</button>
 
-        </div>
-    </form>
+        </form>
+
+        <ul id="poleDane">
+        </ul>
+
+        <button type="button" onclick="pokaz(event)" id="przycisk1" class="btn btn-primary">Pokaż formularz</button>
+
+    </div>
 
     <script>
+
+        var listaKupujacych = [];
+
+        function pokaz(event)
+        {
+            const poleFormularz = document.getElementById("poleFormularz");
+            const przycisk1 = document.getElementById("przycisk1");
+
+            poleFormularz.style.display = "block";
+
+            tekstGora = document.getElementById("tekstGora");
+            tekstGora.innerHTML = "Dodaj klienta:";
+
+            przycisk1.style.display = "none";
+
+            poleDane = document.getElementById("poleDane");
+            
+            poleDane.innerHTML = "";
+
+            przywrocDostep(event);
+        }
 
         function zapisz(event)
         {
@@ -74,6 +102,25 @@
             };
 
             console.log(obiekt);
+
+            const poleFormularz = document.getElementById("poleFormularz");
+            const przycisk1 = document.getElementById("przycisk1");
+
+            poleFormularz.style.display = "none";
+            przycisk1.style.display = "block";
+
+            tekstGora = document.getElementById("tekstGora");
+            tekstGora.innerHTML = "Lista klientów:";
+
+            listaKupujacych.push(obiekt);
+
+            poleDane = document.getElementById("poleDane");
+            
+            for(let i=0; i < listaKupujacych.length;  i++)
+            {
+                poleDane.innerHTML += `<li>${listaKupujacych[i].nazwaFirmy}</li>`; 
+            }
+
         }
 
         function wstaw(event)
@@ -99,6 +146,21 @@
             document.getElementById("uwagi").disabled=true;
             document.getElementById("branza").disabled=true;
             document.getElementById("aktywny").disabled=true;
+        }
+
+        function przywrocDostep(event)
+        {
+            event.preventDefault()
+
+            document.getElementById("nazwaFirmy").disabled=false;
+            document.getElementById("nip").disabled=false;
+            document.getElementById("miasto").disabled=false;
+            document.getElementById("ulica").disabled=false;
+            document.getElementById("nrDomu").disabled=false;
+            document.getElementById("kodPocztowy").disabled=false;
+            document.getElementById("uwagi").disabled=false;
+            document.getElementById("branza").disabled=false;
+            document.getElementById("aktywny").disabled=false;
         }
 
     </script>
