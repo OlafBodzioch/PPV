@@ -63,6 +63,8 @@
 
     </div>
 
+    <script src="assets/customer.js"></script>
+
     <script>
 
         var listaKupujacych = [];
@@ -90,20 +92,20 @@
         {
             event.preventDefault()
 
-            const obiekt = {
-            nazwaFirmy: document.getElementById("nazwaFirmy").value,
-            nip: document.getElementById("nip").value,
-            miasto: document.getElementById("miasto").value,
-            ulica: document.getElementById("ulica").value,
-            nrDomu: document.getElementById("nrDomu").value,
-            nrMieszkania: document.getElementById("nrMieszkania").value,
-            kodPocztowy: document.getElementById("kodPocztowy").value,
-            uwagi: document.getElementById("uwagi").value,
-            branza: document.getElementById("branza").value,
-            aktywny: document.getElementById("aktywny").checked
-            };
+            let newCustomer = new customer();
+            
+            newCustomer.nazwaFirmy = document.getElementById("nazwaFirmy").value;
+            newCustomer.nip= document.getElementById("nip").value;
+            newCustomer.miasto= document.getElementById("miasto").value;
+            newCustomer.ulica= document.getElementById("ulica").value;
+            newCustomer.nrDomu= document.getElementById("nrDomu").value;
+            newCustomer.nrMieszkania= document.getElementById("nrMieszkania").value;
+            newCustomer.kodPocztowy= document.getElementById("kodPocztowy").value;
+            newCustomer.uwagi= document.getElementById("uwagi").value;
+            newCustomer.branza= document.getElementById("branza").value;
+            newCustomer.aktywny= document.getElementById("aktywny").checked;
 
-            console.log(obiekt);
+            console.log(newCustomer);
 
             const poleFormularz = document.getElementById("poleFormularz");
             const przycisk1 = document.getElementById("przycisk1");
@@ -114,13 +116,13 @@
             tekstGora = document.getElementById("tekstGora");
             tekstGora.innerHTML = "Lista klientów:";
 
-            listaKupujacych.push(obiekt);
+            listaKupujacych.push(newCustomer);
 
             poleDane = document.getElementById("poleDane");
             
             for(let i=0; i < listaKupujacych.length;  i++)
             {
-                poleDane.innerHTML += `<li>${listaKupujacych[i].nazwaFirmy}</li>`; 
+                poleDane.innerHTML += `<li>${listaKupujacych[i].getData()+', '+listaKupujacych[i].getAddress()}</li>`
             }
 
         }
